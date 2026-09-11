@@ -21,10 +21,16 @@ public class ContactoValidator: IValidator<Contacto> {
         
         // validacion campo por campo con funciones de extensión
         if (!contacto.Nombre.IsNombreValid()) 
-            errores.Add("El Nombre es obligatorio y debe tener entre 2-15 caracteres");
+            errores.Add("El Nombre es obligatorio y debe tener entre 2-14 caracteres.");
         
+        if (!contacto.Alias.IsAliasValid())
+            errores.Add("El Alias es obligatorio y debe tener entre 1-20 caracteres.");
         
+        if (!contacto.Telefono.IsTelefonoValid())
+            errores.Add("El Teléfono es obligatorio y solo permite prefijo y números sin - ni caracteres especiales.");
         
+        if(!contacto.Email.IsEmailValid())
+            errores.Add("El Email es obligatorio y tiene que seguir el formato 'xxx@xxx.xxx'");
         
         // si errores contiene algo se devuelve failure, si está vacío se devuelve success
         return errores.Any() ? 

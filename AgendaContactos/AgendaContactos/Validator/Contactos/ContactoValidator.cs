@@ -20,8 +20,8 @@ public class ContactoValidator: IValidator<Contacto> {
         var errores = new List<string>();
         
         // validacion campo por campo con funciones de extensión
-        
-        
+        if (!contacto.Nombre.IsNombreValid()) 
+            errores.Add("El Nombre es obligatorio y debe tener entre 2-15 caracteres");
         
         
         

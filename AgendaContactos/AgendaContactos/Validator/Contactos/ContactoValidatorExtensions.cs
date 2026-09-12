@@ -34,9 +34,12 @@ public static class ContactoValidatorExtensions {
     /// </summary>
     /// <param name="telefono">Telefono del Contacto</param>
     extension(string telefono) {
+        public string NormalizarTelefono() =>
+            telefono.Trim().Replace(" ", "").Replace("-", "");
+        
         public bool IsTelefonoValid() {
             const string TelefonoRegex = @"^\+?\d{9,15}$";
-            return Regex.IsMatch(telefono.Trim(), TelefonoRegex);
+            return Regex.IsMatch(telefono.NormalizarTelefono(), TelefonoRegex);
         }
     }
     

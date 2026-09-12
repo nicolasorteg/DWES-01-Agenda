@@ -24,7 +24,7 @@ public class ContactoValidator: IValidator<Contacto> {
             errores.Add("El Nombre es obligatorio y debe tener entre 2-14 caracteres.");
         
         if (!contacto.Alias.IsAliasValid())
-            errores.Add("El Alias es obligatorio y debe tener entre 1-20 caracteres.");
+            errores.Add("El Alias es obligatorio y debe tener entre 1-19 caracteres.");
         
         if (!contacto.Telefono.IsTelefonoValid())
             errores.Add("El Teléfono es obligatorio y solo permite prefijo y números sin - ni caracteres especiales.");
@@ -32,9 +32,17 @@ public class ContactoValidator: IValidator<Contacto> {
         if(!contacto.Email.IsEmailValid())
             errores.Add("El Email es obligatorio y tiene que seguir el formato 'xxx@xxx.xxx'");
         
+        
+        var contactoNormalizado = contacto with {
+            Nombre = contacto.Nombre.Trim(),
+            Alias = contacto.Alias.Trim(),
+            Telefono = contacto.Telefono.NormalizarTelefono(),
+            Email = contacto.Email.Trim()
+        };
+        
         // si errores contiene algo se devuelve failure, si está vacío se devuelve success
         return errores.Any() ? 
             Result.Failure<Contacto, DomainError>(ContactoErrors.Validation(errores)) : 
-            Result.Success<Contacto, DomainError>(contacto);
+            Result.Success<Contacto, DomainError>(contactoNormalizado);
     }
 }

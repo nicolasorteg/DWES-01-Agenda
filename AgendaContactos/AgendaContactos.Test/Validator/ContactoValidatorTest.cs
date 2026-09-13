@@ -12,8 +12,7 @@ namespace AgendaContactos.Test.Validator;
 [TestFixture]
 [TestOf(typeof(ContactoValidator))]
 public class ContactoValidatorTest {
-
-
+    
     /// <summary>
     /// Almacena validaciones a contactos válidos
     /// </summary>

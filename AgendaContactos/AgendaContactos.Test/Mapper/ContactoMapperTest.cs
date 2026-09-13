@@ -70,8 +70,5 @@ public class ContactoMapperTest {
 
             res.Should().HaveCount(3);
         }
-        
-
     }
-
 }

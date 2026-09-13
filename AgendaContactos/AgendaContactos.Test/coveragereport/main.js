@@ -290,7 +290,7 @@ var assemblies = [
   {
     "name": "AgendaContactos",
     "classes": [
-      { "name": "AgendaContactos.Config.AppConfig", "rp": "AgendaContactos_AppConfig.html", "cl": 0, "ucl": 23, "cal": 23, "tl": 53, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AgendaContactos.Config.AppConfig", "rp": "AgendaContactos_AppConfig.html", "cl": 33, "ucl": 1, "cal": 34, "tl": 53, "cb": 10, "tb": 20, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AgendaContactos.Entity.AppDbContext", "rp": "AgendaContactos_AppDbContext.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 9, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AgendaContactos.Entity.ContactoEntity", "rp": "AgendaContactos_ContactoEntity.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 27, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AgendaContactos.Errors.Common.DomainError", "rp": "AgendaContactos_DomainError.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 7, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },

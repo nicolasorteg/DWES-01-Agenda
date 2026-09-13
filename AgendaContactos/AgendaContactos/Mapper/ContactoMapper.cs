@@ -6,7 +6,7 @@ namespace AgendaContactos.Mapper;
 public static class ContactoMapper {
 
     /// <summary> Conversión Model -> Entity </summary>
-    public static ContactoEntity ToEntity(this Contacto contacto) => new ContactoEntity() {
+    public static ContactoEntity ToEntity(this Contacto contacto) => new () {
         Id = contacto.Id,
         Nombre = contacto.Nombre,
         Telefono = contacto.Telefono,
@@ -15,12 +15,12 @@ public static class ContactoMapper {
     };
     
     /// <summary> Conversión Entity -> Model </summary>
-    public static Contacto ToModel(this ContactoEntity entity) => new() {
-        Id = entity.Id,
-        Nombre = entity.Nombre,
-        Telefono = entity.Telefono,
-        Alias = entity.Alias,
-        Email = entity.Email
+    public static Contacto ToModel(this ContactoEntity contactoEntity) => new() {
+        Id = contactoEntity.Id,
+        Nombre = contactoEntity.Nombre,
+        Telefono = contactoEntity.Telefono,
+        Alias = contactoEntity.Alias,
+        Email = contactoEntity.Email
     };
     
     /// <summary> Conversión Listado de Entity -> Listado de Model </summary>

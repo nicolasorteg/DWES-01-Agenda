@@ -1,7 +1,4 @@
-﻿using AgendaContactos.Errors.Common;
-using CSharpFunctionalExtensions;
-
-namespace AgendaContactos.Repository.Common;
+﻿namespace AgendaContactos.Repository.Common;
 
 /// <summary>
 /// Contrato genérico para operaciones CRUD

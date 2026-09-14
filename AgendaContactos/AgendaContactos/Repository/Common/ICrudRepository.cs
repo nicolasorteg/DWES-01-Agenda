@@ -23,20 +23,25 @@ public interface ICrudRepository<TEntity, in TKey> where TEntity : class {
     /// <summary>
     /// Crea una nueva entidad en el sistema
     /// </summary>
-    Result<TEntity, DomainError> Create(TEntity entity);
+    bool Create(TEntity entity);
 
     /// <summary>
     /// Actualiza una entidad existente
     /// </summary>
-    Result<TEntity, DomainError> Update(TKey id, TEntity entity);
+    bool Update(TKey id, TEntity entity);
 
     /// <summary>
     /// Elimina una entidad
     /// </summary>
-    TEntity? Delete(TKey id, bool isLogical = true);
+    bool Delete(TKey id, bool isLogical = true);
 
     /// <summary>
     /// Elimina todos los registros del sistema
     /// </summary>
     bool DeleteAll();
+    
+    /// <summary>
+    /// Cuenta el total de entidades
+    /// </summary>
+    int Count();
 }

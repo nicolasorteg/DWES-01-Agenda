@@ -42,7 +42,7 @@ public class ContactoEfCoreRepository : IContactoRepository {
     }
 
     /// <inheritdoc cref="IContactoRepository.GetAll" />
-    public IEnumerable<Contacto> GetAll(int pagina = 1, int tamPagina = 10) {
+    public IEnumerable<Contacto> GetAll(int pagina = 1, int tamPagina = 5) {
         try {
             _logger.Debug($"Obteniendo todos de forma paginada...");
             

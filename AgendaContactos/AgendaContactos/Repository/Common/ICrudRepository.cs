@@ -15,7 +15,7 @@ public interface ICrudRepository<TEntity, in TKey> where TEntity : class {
     /// <summary>
     /// Obtiene todos los contactos de forma paginada
     /// </summary>
-    IEnumerable<TEntity> GetAll(int pagina = 1, int tamPagina = 10);
+    IEnumerable<TEntity> GetAll(int pagina = 1, int tamPagina = 5);
 
     /// <summary>
     /// Crea una nueva entidad en el sistema

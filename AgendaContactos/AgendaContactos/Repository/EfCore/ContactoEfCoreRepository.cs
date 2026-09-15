@@ -1,6 +1,7 @@
 ﻿using AgendaContactos.Config;
 using AgendaContactos.Entity;
 using AgendaContactos.Factories;
+using AgendaContactos.Mapper;
 using AgendaContactos.Model;
 using AgendaContactos.Repository.Common;
 using Serilog;
@@ -28,39 +29,142 @@ public class ContactoEfCoreRepository : IContactoRepository {
         foreach (var contacto in ContactoFactory.Seed()) Create(contacto);
     }
     
+    /// <inheritdoc cref="IContactoRepository.GetById" />
     public Contacto? GetById(int id) {
-        throw new NotImplementedException();
+        try {
+            _logger.Debug($"Obteniendo Contacto por ID: {id}");
+            return _context.Contactos.FirstOrDefault(c => c.Id == id)?.ToModel();
+        }
+        catch (Exception ex) {
+            _logger.Error(ex, $"Error al obtener Contacto por ID {id}.");
+            return null;
+        }
     }
 
+    /// <inheritdoc cref="IContactoRepository.GetAll" />
     public IEnumerable<Contacto> GetAll(int pagina = 1, int tamPagina = 10) {
-        throw new NotImplementedException();
+        try {
+            _logger.Debug($"Obteniendo todos de forma paginada...");
+            
+            // ordenacion y paginacion
+            var entidades = _context.Contactos
+                .OrderBy(c => c.Id) // menor a mayor ID
+                .Skip((pagina - 1) * tamPagina) // se salta los de las páginas anteriores
+                .Take(tamPagina)
+                .ToList();
+            
+            return entidades.Select(e => e.ToModel());
+        }
+        catch (Exception ex) {
+            _logger.Error(ex, "Error obteniendo todos los Contactos.");
+            return [];
+        }
     }
 
+    /// <inheritdoc cref="IContactoRepository.Create" />
     public bool Create(Contacto entity) {
-        throw new NotImplementedException();
+        try {
+            _logger.Debug($"Insertando nuevo Contacto...");
+
+            var dbEntity = entity.ToEntity();
+            _context.Contactos.Add(dbEntity);
+            _context.SaveChanges(); // genera ID autoincremental
+            
+            return true;
+        }
+        catch (Exception ex) {
+            _logger.Error(ex, "Error al crear Contacto en EF Core.");
+            return false;
+        }
     }
 
+    /// <inheritdoc cref="IContactoRepository.Update" />
     public bool Update(int id, Contacto entity) {
-        throw new NotImplementedException();
+        try {
+            _logger.Debug($"Actualizando Contacto por EFCore con ID: {id}");
+
+            var dbEntity = _context.Contactos.FirstOrDefault(c => c.Id == id);
+            if (dbEntity == null) return false;
+            
+            dbEntity.Nombre = entity.Nombre;
+            dbEntity.Telefono = entity.Telefono;
+            dbEntity.Alias = entity.Alias;
+            dbEntity.Email = entity.Email;
+            _context.SaveChanges();
+            
+            return true;
+        }
+        catch (Exception ex) {
+            _logger.Error(ex, "Error al actualizar el Contacto.");
+            return false;
+        }
     }
 
+    /// <inheritdoc cref="IContactoRepository.Delete" />
     public bool Delete(int id) {
-        throw new NotImplementedException();
+        try {
+            _logger.Debug($"Eliminando Contacto por EFCore con ID: {id}");
+
+            var dbEntity = _context.Contactos.FirstOrDefault(c => c.Id == id);
+            if (dbEntity == null) return false;
+
+            _context.Contactos.Remove(dbEntity);
+            _context.SaveChanges();
+            
+            return true;
+        }
+        catch (Exception ex) {
+            _logger.Error(ex, "Error al eliminar el Contacto.");
+            return false;
+        }
     }
 
+    /// <inheritdoc cref="IContactoRepository.DeleteAll" />
     public bool DeleteAll() {
-        throw new NotImplementedException();
+        try {
+            _context.Contactos.RemoveRange(_context.Contactos);
+            _context.SaveChanges();
+            return true;
+        }
+        catch (Exception ex) {
+            _logger.Error(ex, "Error al vaciar la tabla Contactos.");
+            return false;
+        }
     }
 
+    /// <inheritdoc cref="IContactoRepository.Count" />
     public int Count() {
-        throw new NotImplementedException();
+        try {
+            _logger.Debug("Contando nº de Contactos...");
+            return _context.Contactos.Count();
+        }
+        catch (Exception ex) {
+            _logger.Error(ex, "Error al contar Contactos.");
+            return 0;
+        }
     }
 
+    /// <inheritdoc cref="IContactoRepository.GetByAlias" />
     public Contacto? GetByAlias(string alias) {
-        throw new NotImplementedException();
+        try {
+            _logger.Debug($"Obteniendo Contacto por Alias: {alias}");
+            return _context.Contactos.FirstOrDefault(c => c.Alias == alias)?.ToModel();
+        }
+        catch (Exception ex) {
+            _logger.Error(ex, $"Error al obtener Contacto por Alias {alias}.");
+            return null;
+        }
     }
 
+    /// <inheritdoc cref="IContactoRepository.GetByTelefono" />
     public Contacto? GetByTelefono(string telefono) {
-        throw new NotImplementedException();
+        try {
+            _logger.Debug($"Obteniendo Contacto por Teléfono: {telefono}");
+            return _context.Contactos.FirstOrDefault(c => c.Telefono == telefono)?.ToModel();
+        }
+        catch (Exception ex) {
+            _logger.Error(ex, $"Error al obtener Contacto por Teléfono {telefono}.");
+            return null;
+        }
     }
 }

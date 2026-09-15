@@ -306,8 +306,8 @@ public class ContactoServiceTest {
         // arrange
         _contactoValidatorMock.Setup(v => v.Validar(_contactoPrueba)).Returns(Result.Success<Contacto, DomainError>(_contactoPrueba));
         _contactoRepositoryMock.Setup(r => r.GetById(_contactoPrueba.Id)).Returns(_contactoPrueba);
-        _contactoRepositoryMock.Setup(r => r.GetByTelefono(_contactoPrueba.Telefono)).Returns((Contacto?)null); // 👈 rama null
-        _contactoRepositoryMock.Setup(r => r.GetByAlias(_contactoPrueba.Alias)).Returns((Contacto?)null);       // 👈 rama null
+        _contactoRepositoryMock.Setup(r => r.GetByTelefono(_contactoPrueba.Telefono)).Returns((Contacto?)null);
+        _contactoRepositoryMock.Setup(r => r.GetByAlias(_contactoPrueba.Alias)).Returns((Contacto?)null);
         _contactoRepositoryMock.Setup(r => r.Update(_contactoPrueba.Id, _contactoPrueba)).Returns(true);
 
         // act

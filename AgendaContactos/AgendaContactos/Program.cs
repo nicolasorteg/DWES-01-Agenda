@@ -8,7 +8,7 @@ using AgendaContactos.Validator.Contactos;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-// config serilog
+// config serilog con los datos del json
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Is(Enum.Parse<Serilog.Events.LogEventLevel>(AppConfig.LogMinimumLevel))
     .WriteTo.File(
@@ -18,11 +18,10 @@ Log.Logger = new LoggerConfiguration()
         outputTemplate: AppConfig.LogOutputTemplate)
     .CreateLogger();
 
-// ---------- Composition root ----------
+// inicia la bd
 var options = new DbContextOptionsBuilder<AppDbContext>()
     .UseSqlite(AppConfig.ConnectionString)
     .Options;
-
 var context = new AppDbContext(options);
 
 var repository = new ContactoEfCoreRepository(context);
@@ -33,7 +32,6 @@ var service = new ContactoService(repository, validator, cache);
 
 Console.WriteLine($"{AppConfig.AppName} - Simulación de peticiones\n");
 Console.WriteLine($"Nº de Contactos -> {service.ContarAgenda()}");
-
 
 Console.WriteLine("- Página 1 -");
 foreach (var c in service.ObtenerContactosPaginados()) 

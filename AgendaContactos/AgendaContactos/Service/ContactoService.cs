@@ -120,4 +120,6 @@ public class ContactoService(IContactoRepository repository, IValidator<Contacto
         if (eliminado) cache.Clear();
         return eliminado;
     }
+
+    public int ContarAgenda() => repository.Count();
 }

@@ -30,7 +30,7 @@ public abstract record ContactoError(string Message) : DomainError(Message) {
     /// </summary>
     /// <param name="Errores">Listado de mensajes de errores de validación</param>
     public sealed record Validation(IEnumerable<string> Errores) 
-        : ContactoError($"Se han detectado errores de validación en la entidad:{Environment.NewLine} - {string.Join($"{Environment.NewLine}• ", Errores)}");
+        : ContactoError($"Se han detectado errores de validación en la entidad:{Environment.NewLine} {string.Join($"{Environment.NewLine}• ", Errores)}");
     
     /// <summary>
     /// Error de Telefono repetido (409)

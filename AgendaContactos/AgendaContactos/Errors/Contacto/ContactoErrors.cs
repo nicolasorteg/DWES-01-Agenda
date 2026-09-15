@@ -14,6 +14,9 @@ public static class ContactoErrors {
     /// <inheritdoc cref="ContactoError.NotFoundByAlias"/>
     public static DomainError NotFoundByAlias(string alias) =>
         new ContactoError.NotFoundByAlias(alias);
+    
+    public static DomainError NotFoundByTelefono(string telefono) =>
+        new ContactoError.NotFoundByTelefono(telefono);
 
     /// <inheritdoc cref="ContactoError.Validation"/>
     public static DomainError Validation(IEnumerable<string> errors) =>

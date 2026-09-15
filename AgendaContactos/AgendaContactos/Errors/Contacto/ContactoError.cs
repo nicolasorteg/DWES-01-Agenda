@@ -22,6 +22,9 @@ public abstract record ContactoError(string Message) : DomainError(Message) {
     public sealed record NotFoundByAlias(string Alias) 
         : ContactoError($"No se ha encontrado ningún Contacto con el alias: {Alias}");
     
+    public sealed record NotFoundByTelefono(string Telefono) 
+        : ContactoError($"No se ha encontrado ningún Contacto con el teléfono: {Telefono}");
+    
     /// <summary>
     /// Error de validación en el Contacto (400)
     /// </summary>

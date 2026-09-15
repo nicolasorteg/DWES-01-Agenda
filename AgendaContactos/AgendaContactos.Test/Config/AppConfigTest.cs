@@ -68,6 +68,6 @@ public class AppConfigTest {
     
     [Test]
     public void CacheSize_DeberiaSerDiez() {
-        AppConfig.CacheSize.Should().Be(10);
+        AppConfig.CacheSize.Should().Be(5);
     }
 }

@@ -290,6 +290,7 @@ var assemblies = [
   {
     "name": "AgendaContactos",
     "classes": [
+      { "name": "AgendaContactos.Cache.LruCache\u003CT1, T2\u003E", "rp": "AgendaContactos_LruCache_2.html", "cl": 52, "ucl": 0, "cal": 52, "tl": 85, "cb": 10, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AgendaContactos.Config.AppConfig", "rp": "AgendaContactos_AppConfig.html", "cl": 34, "ucl": 0, "cal": 34, "tl": 52, "cb": 10, "tb": 20, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AgendaContactos.Entity.AppDbContext", "rp": "AgendaContactos_AppDbContext.html", "cl": 8, "ucl": 1, "cal": 9, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AgendaContactos.Entity.ContactoEntity", "rp": "AgendaContactos_ContactoEntity.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 27, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },

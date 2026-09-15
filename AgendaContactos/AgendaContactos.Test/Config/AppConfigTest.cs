@@ -32,11 +32,6 @@ public class AppConfigTest {
     public void SeedData_DeberiaCoincidirConAppsettings() {
         AppConfig.SeedData.Should().BeTrue();
     }
-
-    [Test]
-    public void UseLogicalDelete_DeberiaCoincidirConAppsettings() {
-        AppConfig.UseLogicalDelete.Should().BeTrue();
-    }
     
     [Test]
     public void ConnectionString_DeberiaContenerDataSource() {

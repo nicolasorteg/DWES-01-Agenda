@@ -32,7 +32,6 @@ public static class AppConfig {
     
     public static bool DropData => Configuration.GetValue("Repository:DropData", false);
     public static bool SeedData => Configuration.GetValue("Repository:SeedData", true);
-    public static bool UseLogicalDelete => Configuration.GetValue("Repository:UseLogicalDelete", true);
     
     // caché
     public static int CacheSize => Configuration.GetValue("Cache:Size", 10);

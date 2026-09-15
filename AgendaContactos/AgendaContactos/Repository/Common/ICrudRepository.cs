@@ -30,7 +30,7 @@ public interface ICrudRepository<TEntity, in TKey> where TEntity : class {
     /// <summary>
     /// Elimina una entidad
     /// </summary>
-    bool Delete(TKey id, bool isLogical = true);
+    bool Delete(TKey id);
 
     /// <summary>
     /// Elimina todos los registros del sistema

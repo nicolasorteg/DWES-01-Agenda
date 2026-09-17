@@ -11,9 +11,11 @@ namespace AgendaContactos.Service;
 
 public class ContactoService(IContactoRepository repository, IValidator<Contacto> validator, ICache<int, Contacto> cache) : IContactoService {
     
+    private readonly ILogger _logger = Log.ForContext<ContactoService>();
+    
     /// <inheritdoc cref="IContactoService.BuscarContactoPorId" />
     public Result<Contacto, DomainError> BuscarContactoPorId(int id) {
-        Log.Debug($"Buscando Contacto por ID {id}");
+        _logger.Debug($"Buscando Contacto por ID {id}");
 
         var isInCache = cache.Get(id);
         if (isInCache is not null)
@@ -29,7 +31,7 @@ public class ContactoService(IContactoRepository repository, IValidator<Contacto
 
     /// <inheritdoc cref="IContactoService.BuscarContactoPorAlias" />
     public Result<Contacto, DomainError> BuscarContactoPorAlias(string alias) {
-        Log.Debug($"Buscando Contacto por Alias {alias}");
+        _logger.Debug($"Buscando Contacto por Alias {alias}");
 
         var contacto = repository.GetByAlias(alias);
         return contacto != null
@@ -39,7 +41,7 @@ public class ContactoService(IContactoRepository repository, IValidator<Contacto
 
     /// <inheritdoc cref="IContactoService.BuscarContactoPorTelefono" />
     public Result<Contacto, DomainError> BuscarContactoPorTelefono(string telefono) {
-        Log.Debug($"Buscando Contacto por Teléfono {telefono}");
+        _logger.Debug($"Buscando Contacto por Teléfono {telefono}");
 
         var contacto = repository.GetByTelefono(telefono);
         return contacto != null
@@ -53,7 +55,7 @@ public class ContactoService(IContactoRepository repository, IValidator<Contacto
 
     /// <inheritdoc cref="IContactoService.CrearContacto" />
     public Result<Contacto, DomainError> CrearContacto(Contacto contacto) {
-        Log.Debug("Creación de Contacto...");
+        _logger.Debug("Creación de Contacto...");
 
         return validator.Validar(contacto)
             .Ensure(c => repository.GetByTelefono(c.Telefono) is null,
@@ -75,7 +77,7 @@ public class ContactoService(IContactoRepository repository, IValidator<Contacto
 
     /// <inheritdoc cref="IContactoService.ActualizarContacto" />
     public Result<Contacto, DomainError> ActualizarContacto(int id, Contacto contacto) {
-        Log.Debug($"Procesando actualización de Contacto ID {id}");
+        _logger.Debug($"Procesando actualización de Contacto ID {id}");
 
         return validator.Validar(contacto)
             .Ensure(_ => repository.GetById(id) is not null,
@@ -99,7 +101,7 @@ public class ContactoService(IContactoRepository repository, IValidator<Contacto
 
     /// <inheritdoc cref="IContactoService.EliminarContacto" />
     public Result<Contacto, DomainError> EliminarContacto(int id) {
-        Log.Warning($"Eliminando Contacto ID: {id}");
+        _logger.Warning($"Eliminando Contacto ID: {id}");
 
         var contacto = repository.GetById(id);
         if (contacto == null)
@@ -115,7 +117,7 @@ public class ContactoService(IContactoRepository repository, IValidator<Contacto
 
     /// <inheritdoc cref="IContactoService.EliminarTodosLosContactos" />
     public bool EliminarTodosLosContactos() {
-        Log.Warning("Eliminando de forma absoluta todos los contactos");
+        _logger.Warning("Eliminando de forma absoluta todos los contactos");
         var eliminado = repository.DeleteAll();
         if (eliminado) cache.Clear();
         return eliminado;

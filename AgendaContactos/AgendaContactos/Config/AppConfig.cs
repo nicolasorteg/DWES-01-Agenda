@@ -41,8 +41,9 @@ public static class AppConfig {
         Configuration.GetValue<string>("Serilog:MinimumLevel") ?? "Debug";
 
     public static string LogFilePath => 
-        Configuration.GetValue<string>("Serilog:WriteTo:1:Args:path") ?? "log/log-.txt";
-
+        Path.Combine(AppDomain.CurrentDomain.BaseDirectory, 
+            Configuration.GetValue<string>("Serilog:WriteTo:1:Args:path") ?? "log/log-.txt");
+    
     public static int LogRetainedFiles => 
         Configuration.GetValue<int>("Serilog:WriteTo:1:Args:retainedFileCountLimit", 5);
 

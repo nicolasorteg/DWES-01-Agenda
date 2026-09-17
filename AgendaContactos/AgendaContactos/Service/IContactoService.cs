@@ -29,4 +29,6 @@ public interface IContactoService {
     
     /// <summary> Elimina todos los contactos </summary>
     bool EliminarTodosLosContactos();
+
+    public int ContarAgenda();
 }

@@ -1,11 +1,10 @@
-﻿using AgendaContactos.Cache;
-using AgendaContactos.Config;
+﻿using AgendaContactos.Config;
 using AgendaContactos.Entity;
+using AgendaContactos.Infrastructure;
 using AgendaContactos.Model;
-using AgendaContactos.Repository.EfCore;
 using AgendaContactos.Service;
-using AgendaContactos.Validator.Contactos;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
 // config serilog con los datos del json
@@ -24,11 +23,10 @@ var options = new DbContextOptionsBuilder<AppDbContext>()
     .Options;
 var context = new AppDbContext(options);
 
-var repository = new ContactoEfCoreRepository(context);
-var validator = new ContactoValidator();
-var cache = new LruCache<int, Contacto>(AppConfig.CacheSize); // capacidad 5
-var service = new ContactoService(repository, validator, cache);
-
+// ID
+var provider = DependenciesProvider.BuildServiceProvider();
+var scope = provider.CreateScope();
+var service = scope.ServiceProvider.GetRequiredService<IContactoService>();
 
 Console.WriteLine($"{AppConfig.AppName} - Simulación de peticiones\n");
 Console.WriteLine($"Nº de Contactos -> {service.ContarAgenda()}");
